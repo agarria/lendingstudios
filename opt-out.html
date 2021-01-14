@@ -187,6 +187,22 @@
         text-align: center;
       }
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script>
+      function SubForm (){
+        $.ajax({
+          url:"https://api.apispreadsheets.com/data/6492/",
+          type:"post",
+          data:$("#form").serializeArray(),
+          success: function(){
+            alert("Form Data Submitted :)")
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+    </script>
 </head>
 <body>
   <main>
@@ -198,7 +214,7 @@
         <span class="title">You want to opt-out?</span>
         <span class="description">Lending Studios takes the privacy and integrity of our users very seriously, fill out the form to complete your request.</span>
       </span>
-      <form>
+      <form id="form">
         <label>Name<i>*</i></label>
         <input name="name" type="text" required>
         <label>Phone Number<i>*</i></label>
@@ -210,23 +226,4 @@
     </div>
   </main>
 </body>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-<script>
-  function SubForm (){
-    $.ajax({
-      url:"https://api.apispreadsheets.com/data/6492/",
-      type:"post",
-      data:$("#myForm").serializeArray(),
-      success: function(){
-        alert("Form Data Submitted :)")
-      },
-      error: function(){
-        alert("There was an error :(")
-      }
-    });
-  }
-</script>
 </html>
