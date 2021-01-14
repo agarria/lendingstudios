@@ -135,7 +135,7 @@
         font-weight: 400;
       }
 
-      button {
+      input[type=submit] {
         position: relative;
         display: flex;
         align-items: center;
@@ -186,23 +186,26 @@
         font-weight: 400;
         text-align: center;
       }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script>
-      function SubForm (){
-        $.ajax({
-          url:"https://api.apispreadsheets.com/data/6492/",
-          type:"post",
-          data:$("#form").serializeArray(),
-          success: function(){
-            alert("Form Data Submitted :)")
-          },
-          error: function(){
-            alert("There was an error :(")
-          }
-        });
+
+      #success {
+        position: absolute;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+        margin: 0;
+        top: 0;
+        left: 0;
+        z-index: 666;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 400;
+        background: #95bf39;
+        text-align: center;
       }
-    </script>
+    </style>
 </head>
 <body>
   <main>
@@ -214,16 +217,38 @@
         <span class="title">You want to opt-out?</span>
         <span class="description">Lending Studios takes the privacy and integrity of our users very seriously, fill out the form to complete your request.</span>
       </span>
-      <form id="form">
+      <form id="form" onsubmit="SubForm()">
+        <span id="success">
+          Thank you for filling out the form, you are currently opt-out from Lending Studios and all its related services.
+          <br>
+          <br>
+          You can close this window now
+        </span>
         <label>Name<i>*</i></label>
-        <input name="name" type="text" required>
+        <input name="Name" type="text" required>
         <label>Phone Number<i>*</i></label>
-        <input name="phone" type="text" required>
+        <input name="Phone" type="text" required>
         <label>Emai<i>*</i></label>
-        <input name="email" type="text" required>
-        <button onclick="SubForm()">Opt Out</button>
+        <input name="Email" type="text" required>
+        <input type="submit" value="Opt Out">
       </form>
     </div>
   </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script>
+  function SubForm (){
+    $.ajax({
+      url:"https://api.apispreadsheets.com/data/6492/",
+      type:"post",
+      data:$("#form").serializeArray(),
+      success: function(){
+        $("#success").css('display','flex')
+      },
+      error: function(){
+        alert("There was an error in the form, it will be working soon.")
+      }
+    });
+  }
+</script>
 </html>
